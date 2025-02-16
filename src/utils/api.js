@@ -1,0 +1,1 @@
+export const api_url = "https://codezone-courses-zl0e.onrender.com";
