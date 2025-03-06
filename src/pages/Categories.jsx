@@ -1,8 +1,9 @@
 import React from 'react'
+import AllCategory from '../components/Categories/AllCategory'
 
 const Categories = () => {
     return (
-        <div>Categories</div>
+        <div><AllCategory /></div>
     )
 }
 

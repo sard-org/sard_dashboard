@@ -1,8 +1,9 @@
 import React from 'react'
+import AllUser from '../components/Users/AllUser'
 
 const Users = () => {
     return (
-        <div>Users</div>
+        <div><AllUser /></div>
     )
 }
 

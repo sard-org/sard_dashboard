@@ -1,8 +1,11 @@
 import React from 'react'
+import AllBook from '../components/Books/AllBook'
 
 const Book = () => {
     return (
-        <div>Book</div>
+        <div>
+            <AllBook />
+        </div>
     )
 }
 
