@@ -13,13 +13,12 @@ import Books from "../pages/Book";
 import AddBook from "../components/Books/AddBook";
 import UpdateBook from "../components/Books/UpdateBook";
 import Orders from "../pages/Orders";
-import AddOrder from "../components/Orders/AddOrder";
-import UpdateOrder from "../components/Orders/UpdateOrder";
 import Auth from "../components/Auth/Auth";
 import UserDetails from "../components/Users/UserDetails";
 import AuthorDetails from "../components/Authors/AuthorDetails";
 import CategoryDetails from "../components/Categories/CategoryDetails";
 import BookDetails from "../components/Books/BookDetails";
+import OrderDetails from "../components/Orders/OrderDetails";
 
 const AppRouter = () => {
     return (
@@ -47,8 +46,7 @@ const AppRouter = () => {
                 <Route path="/books/:id" element={<BookDetails />} />
 
                 <Route path="/orders" element={<Orders />} />
-                <Route path="/orders/add" element={<AddOrder />} />
-                <Route path="/orders/update" element={<UpdateOrder />} />
+                <Route path="/orders/:id" element={<OrderDetails />} />
             </Route>
 
             <Route path="*" element={<Auth />} />

@@ -1,9 +1,10 @@
 import React from 'react'
+import AllOrders from '../components/Orders/AllOrders'
 
 const Orders = () => {
     return (
-        <div>Orders</div>
+        <div><AllOrders /></div>
     )
 }
 
-export default Orders
+export default Orders;
