@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { 
     FiMenu, FiUsers, FiBookOpen, FiList, 
     FiShoppingCart, FiUserCheck, FiChevronUp, 
@@ -25,65 +25,64 @@ const Sidebar = () => {
                     
                     {/* Users Menu */}
                     <li className={`menu-item ${openMenu === "users" ? "active" : ""}`}>
-                        <Link to="/" onClick={() => toggleSubMenu("users")}>
+                        <div onClick={() => toggleSubMenu("users")}>
                             <FiUsers /> Users
                             {openMenu === "users" ? <FiChevronUp /> : <FiChevronDown />}
-                        </Link>
+                        </div>
                     </li>
                     <ul className={`sub-menu ${openMenu === "users" ? "open" : ""}`}>
-                        <li><Link to="/users/add">Add User</Link></li>
+                        <li><NavLink to="/users/add">Add User</NavLink></li>
                     </ul>
 
                     {/* Authors Menu */}
                     <li className={`menu-item ${openMenu === "authors" ? "active" : ""}`}>
-                        <Link to="/authors" onClick={() => toggleSubMenu("authors")}>
+                        <div onClick={() => toggleSubMenu("authors")}>
                             <FiUserCheck /> Authors
                             {openMenu === "authors" ? <FiChevronUp /> : <FiChevronDown />}
-                        </Link>
+                        </div>
                     </li>
                     <ul className={`sub-menu ${openMenu === "authors" ? "open" : ""}`}>
-                        <li><Link to="/authors/add">Add Author</Link></li>
+                        <li><NavLink to="/authors/add">Add Author</NavLink></li>
                     </ul>
 
                     {/* Categories Menu */}
                     <li className={`menu-item ${openMenu === "categories" ? "active" : ""}`}>
-                        <Link to="/categories" onClick={() => toggleSubMenu("categories")}>
+                        <div onClick={() => toggleSubMenu("categories")}>
                             <FiList /> Categories
                             {openMenu === "categories" ? <FiChevronUp /> : <FiChevronDown />}
-                        </Link>
+                        </div>
                     </li>
                     <ul className={`sub-menu ${openMenu === "categories" ? "open" : ""}`}>
-                        <li><Link to="/categories/add">Add Category</Link></li>
+                        <li><NavLink to="/categories/add">Add Category</NavLink></li>
                     </ul>
 
                     {/* Books Menu */}
                     <li className={`menu-item ${openMenu === "books" ? "active" : ""}`}>
-                        <Link to="/books" onClick={() => toggleSubMenu("books")}>
+                        <div onClick={() => toggleSubMenu("books")}>
                             <FiBookOpen /> Books
                             {openMenu === "books" ? <FiChevronUp /> : <FiChevronDown />}
-                        </Link>
+                        </div>
                     </li>
                     <ul className={`sub-menu ${openMenu === "books" ? "open" : ""}`}>
-                        <li><Link to="/books/add">Add Book</Link></li>
+                        <li><NavLink to="/books/add">Add Book</NavLink></li>
                     </ul>
 
                     {/* Orders Menu */}
                     <li className={`menu-item ${openMenu === "orders" ? "active" : ""}`}>
-                        <Link to="/orders" onClick={() => toggleSubMenu("orders")}>
+                        <div onClick={() => toggleSubMenu("orders")}>
                             <FiShoppingCart /> Orders
                             {openMenu === "orders" ? <FiChevronUp /> : <FiChevronDown />}
-                        </Link>
+                        </div>
                     </li>
                     <ul className={`sub-menu ${openMenu === "orders" ? "open" : ""}`}>
-                        <li><Link to="/orders/add">Add Order</Link></li>
+                        <li><NavLink to="/orders/add">Add Order</NavLink></li>
                     </ul>
 
                 </ul>
-
             </div>
 
             {/* Toggle Sidebar Button */}
-            <button className="menu-button" onClick={() => setIsOpen(true)}>
+            <button className="menu-button" onClick={() => setIsOpen(!isOpen)}>
                 <FiMenu />
             </button>
         </>

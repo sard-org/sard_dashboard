@@ -129,6 +129,33 @@
     padding: 20px;
 }
 
+.menu-item a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.menu-item a:hover {
+    color: white;
+}
+
+.menu-item.active a {
+    color: white;
+}
+
+/* Fix Submenu Links */
+.sub-menu li a {
+    text-decoration: none; /* Remove underline */
+    color: #70A972;
+}
+
+.sub-menu li a:hover {
+    color: #508757;
+}
+
 /* Responsive: Move sidebar off-screen for mobile */
 @media (max-width: 768px) {
     .sidebar {
