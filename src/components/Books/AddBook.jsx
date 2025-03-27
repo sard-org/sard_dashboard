@@ -10,7 +10,7 @@ const { Option } = Select;
 const AddBook = () => {
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
-    const [categories, setCategories] = useState([""]); // قائمة الفئات
+    const [categories, setCategories] = useState([""]);
     const [coverFile, setCoverFile] = useState(null);
     const [audioFile, setAudioFile] = useState(null);
     const navigate = useNavigate(); 
