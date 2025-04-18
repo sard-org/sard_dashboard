@@ -43,6 +43,23 @@ const AllUser = () => {
         user.email.toLowerCase().includes(searchText.toLowerCase())
     );
 
+    const handleDelete = async (id) => {
+        const token = localStorage.getItem("token");
+        if (!token) return console.error("No token found!");
+
+        try {
+            await axios.delete(`${api_url}/api/users/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            setUsers(users.filter((user) => user.id !== id));
+        } catch (error) {
+            console.error("Error deleting user:", error);
+        }
+    };
+
+
     const columns = [
         {
             title: "#",
@@ -83,9 +100,14 @@ const AllUser = () => {
                         icon={<InfoCircleFilled />}
                         onClick={() => navigate(`/users/${record.id}/view`)}
                     />
+                    <Button
+                        danger
+                        icon={<DeleteOutlined />}
+                        onClick={() => handleDelete(record.id)}
+                    />
                 </Space>
             ),
-        },
+        }
     ];
 
     return (
