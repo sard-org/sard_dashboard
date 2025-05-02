@@ -138,6 +138,19 @@
     width: 100%;
 }
 
+.menu-item > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.menu-item > div span {
+    flex: 1;
+    text-align: center;
+}
+
+
 .menu-item a:hover {
     color: white;
 }
