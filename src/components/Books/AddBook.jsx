@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Upload, message, InputNumber, Select } from "antd";
+import {
+    Form, Input, Button, Upload, message, InputNumber, Modal
+} from "antd";
 import { UploadOutlined, PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { api_url } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
-
-const { Option } = Select;
+import { FaMagic } from "react-icons/fa";
 
 const AddBook = () => {
     const [form] = Form.useForm();
@@ -13,7 +14,11 @@ const AddBook = () => {
     const [categories, setCategories] = useState([""]);
     const [coverFile, setCoverFile] = useState(null);
     const [audioFile, setAudioFile] = useState(null);
-    const navigate = useNavigate(); 
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [suggestTitle, setSuggestTitle] = useState("");
+    const [suggestGenre, setSuggestGenre] = useState("");
+
+    const navigate = useNavigate();
 
     const handleCoverChange = ({ file }) => {
         setCoverFile(file);
@@ -33,6 +38,40 @@ const AddBook = () => {
         setCategories(updatedCategories);
     };
 
+    const cleanDescription = (desc) => {
+        return desc.replace(/[\n\/]/g, '').trim();
+    };
+    const handleSuggestDescription = async () => {
+        const token = localStorage.getItem("token");
+        if (!suggestTitle || !suggestGenre) {
+            message.error("يرجى إدخال العنوان والنوع الأدبي");
+            return;
+        }
+
+        try {
+            const response = await axios.post(
+                `${api_url}/api/books/suggest-description`,
+                {
+                    title: suggestTitle,
+                    genre: suggestGenre,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            const cleanedDescription = cleanDescription(response.data.description);
+            form.setFieldsValue({ description: cleanedDescription });
+            message.success("تم اقتراح وصف للكتاب!");
+            setIsModalVisible(false);
+        } catch (error) {
+            console.error("Suggestion error:", error);
+            message.error("فشل في اقتراح الوصف!");
+        }
+    };
+
     const onFinish = async (values) => {
         if (!coverFile || !audioFile) {
             message.error("يرجى تحميل الغلاف والملف الصوتي!");
@@ -49,17 +88,16 @@ const AddBook = () => {
             formData.append("duration", values.duration);
             formData.append("audio", audioFile);
             formData.append("price", values.price);
-            formData.append("price_points", values.price_points); // ✅ Added price_points
+            formData.append("price_points", values.price_points);
             formData.append("authorId", values.authorId);
 
             categories.forEach((categoryId, index) => {
                 if (index === 0) {
-                    formData.append("categoryId", categoryId); // First category
+                    formData.append("categoryId", categoryId);
                 } else {
-                    formData.append(`categoryId[${index}]`, categoryId); // Subsequent categories
+                    formData.append(`categoryId[${index}]`, categoryId);
                 }
             });
-
 
             await axios.post(`${api_url}/api/books/`, formData, {
                 headers: {
@@ -94,6 +132,10 @@ const AddBook = () => {
                     <Input.TextArea rows={3} placeholder="أدخل وصف الكتاب" />
                 </Form.Item>
 
+                <Form.Item>
+                    <Button type="primary" onClick={() => setIsModalVisible(true)}>اقتراح وصف <FaMagic /></Button>
+                </Form.Item>
+
                 <Form.Item label="الغلاف" name="cover" rules={[{ required: true, message: "يرجى تحميل الغلاف" }]}>
                     <Upload beforeUpload={() => false} maxCount={1} listType="picture" onChange={handleCoverChange}>
                         <Button icon={<UploadOutlined />}>تحميل الغلاف</Button>
@@ -118,15 +160,6 @@ const AddBook = () => {
                     <InputNumber min={0} placeholder="أدخل نقاط السعر" style={{ width: "100%" }} />
                 </Form.Item>
 
-                {/* 
-                <Form.Item label="هل الكتاب مجاني؟" name="is_free" rules={[{ required: true, message: "يرجى اختيار حالة الكتاب" }]}>
-                    <Select placeholder="اختر حالة الكتاب">
-                        <Option value="true">نعم</Option>
-                        <Option value="false">لا</Option>
-                    </Select>
-                </Form.Item> 
-                */}
-
                 <Form.Item label="معرف المؤلف" name="authorId" rules={[{ required: true, message: "يرجى إدخال معرف المؤلف" }]}>
                     <Input placeholder="أدخل معرف المؤلف" />
                 </Form.Item>
@@ -146,7 +179,6 @@ const AddBook = () => {
                     </Form.Item>
                 ))}
 
-
                 <Button type="dashed" onClick={addCategoryField} block icon={<PlusOutlined />}>
                     إضافة فئة أخرى
                 </Button>
@@ -157,6 +189,27 @@ const AddBook = () => {
                     </Button>
                 </Form.Item>
             </Form>
+
+            <Modal
+                title="اقتراح وصف"
+                visible={isModalVisible}
+                onOk={handleSuggestDescription}
+                onCancel={() => setIsModalVisible(false)}
+                okText="اقتراح"
+                cancelText="إلغاء"
+            >
+                <Input
+                    placeholder="عنوان الكتاب"
+                    value={suggestTitle}
+                    onChange={(e) => setSuggestTitle(e.target.value)}
+                    style={{ marginBottom: 10 }}
+                />
+                <Input
+                    placeholder="النوع الأدبي"
+                    value={suggestGenre}
+                    onChange={(e) => setSuggestGenre(e.target.value)}
+                />
+            </Modal>
         </div>
     );
 };
