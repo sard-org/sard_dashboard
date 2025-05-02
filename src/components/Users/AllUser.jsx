@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import { api_url } from "../../utils/api";
 import { useNavigate } from "react-router";
+import Title from "antd/es/typography/Title";
 
 const AllUser = () => {
     const [users, setUsers] = useState([]);
@@ -168,7 +169,7 @@ const AllUser = () => {
                     style={{ width: 200 }}
                 />
             </Space> */}
-
+            <Title level={2}>All Users</Title>
             <Table
                 columns={columns}
                 dataSource={filteredUsers.map((user, index) => ({ ...user, key: index }))} // Add key for React list rendering

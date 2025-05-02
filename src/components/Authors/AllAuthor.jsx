@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { EditOutlined, DeleteOutlined, InfoCircleOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { api_url } from "../../utils/api";
+import Title from "antd/es/typography/Title";
 
 const { confirm } = Modal;
 
@@ -147,6 +148,7 @@ const AllAuthor = () => {
 
     return (
         <div style={{ paddingTop: 20, marginLeft: marginLeft , marginTop : 24 }}>
+            <Title level={2}>All Authors</Title>
             <Table
                 columns={columns}
                 dataSource={authors.map((author, index) => ({ ...author, key: author.id }))}

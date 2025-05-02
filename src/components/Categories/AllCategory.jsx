@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { EditOutlined, DeleteOutlined, InfoCircleOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { api_url } from "../../utils/api";
+import Title from "antd/es/typography/Title";
 
 const { confirm } = Modal;
 
@@ -125,6 +126,7 @@ const AllCategory = () => {
 
     return (
         <div style={{ paddingTop: 20, marginLeft: marginLeft , marginTop : 24 }}>
+            <Title level={2}>All Categories</Title>
             <Table
                 columns={columns}
                 dataSource={categories.map((category, index) => ({ ...category, key: category.id }))}

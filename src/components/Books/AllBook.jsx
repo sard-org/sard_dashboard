@@ -9,6 +9,7 @@ import {
 } from "@ant-design/icons";
 import axios from "axios";
 import { api_url } from "../../utils/api";
+import Title from "antd/es/typography/Title";
 
 const { confirm } = Modal;
 
@@ -135,6 +136,7 @@ const AllBook = () => {
 
     return (
         <div style={{ paddingTop: 20, marginLeft: marginLeft , marginTop : 24 }}>
+            <Title level={2}>All Books</Title>
             <Table
                 columns={columns}
                 dataSource={books.map((book, index) => ({
