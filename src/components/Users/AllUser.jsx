@@ -144,7 +144,7 @@ const AllUser = () => {
     ];
 
     return (
-        <div style={{ padding: 20, marginLeft: marginLeft }}>
+        <div style={{ paddingTop: 20, marginLeft: marginLeft , marginTop : 24 }}>
             <Space
                 style={{
                     marginBottom: 16,

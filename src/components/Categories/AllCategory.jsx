@@ -124,7 +124,7 @@ const AllCategory = () => {
     ];
 
     return (
-        <div style={{ padding: 20, marginLeft: marginLeft }}>
+        <div style={{ paddingTop: 20, marginLeft: marginLeft , marginTop : 24 }}>
             <Table
                 columns={columns}
                 dataSource={categories.map((category, index) => ({ ...category, key: category.id }))}

@@ -95,7 +95,7 @@ const AllOrders = () => {
     ];
 
     return (
-        <div style={{ padding: 20, marginLeft: marginLeft }}>
+        <div style={{ paddingTop: 20, marginLeft: marginLeft , marginTop : 24 }}>
             <Title level={2}>All Orders</Title>
             {loading ? (
                 <Spin size="large" />

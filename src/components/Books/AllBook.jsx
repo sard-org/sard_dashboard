@@ -134,7 +134,7 @@ const AllBook = () => {
     ];
 
     return (
-        <div style={{ padding: 20, marginLeft }}>
+        <div style={{ paddingTop: 20, marginLeft: marginLeft , marginTop : 24 }}>
             <Table
                 columns={columns}
                 dataSource={books.map((book, index) => ({

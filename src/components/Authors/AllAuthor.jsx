@@ -146,7 +146,7 @@ const AllAuthor = () => {
     ];
 
     return (
-        <div style={{ padding: 20, marginLeft: marginLeft }}>
+        <div style={{ paddingTop: 20, marginLeft: marginLeft , marginTop : 24 }}>
             <Table
                 columns={columns}
                 dataSource={authors.map((author, index) => ({ ...author, key: author.id }))}
