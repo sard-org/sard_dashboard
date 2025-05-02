@@ -53,7 +53,7 @@ const UserDetails = () => {
                     <Descriptions.Item label="Name">{user.name}</Descriptions.Item>
                     <Descriptions.Item label="Phone No.">{user.phone}</Descriptions.Item>
                     <Descriptions.Item label="E-Mail">{user.email}</Descriptions.Item>
-                    <Descriptions.Item label="Verified">{user.isVerified ? "Yes" : "No"}</Descriptions.Item>
+                    <Descriptions.Item label="isVerified">{user.isVerified ? "Yes" : "No"}</Descriptions.Item>
                 </Descriptions>
             </Card>
         </div>

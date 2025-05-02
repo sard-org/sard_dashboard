@@ -34,8 +34,8 @@ const UpdateUser = () => {
                 setUser(response.data);
                 form.setFieldsValue({
                     ...response.data,
-                    isVerified: response.data.isVerified ? "true" : "false", // Convert boolean to string for Select dropdown
-                });
+                    isVerified: response.data.isVerified,
+                });                
             } catch (error) {
                 message.error("Error fetching user data");
             } finally {
@@ -126,8 +126,8 @@ const UpdateUser = () => {
                                 rules={[{ required: true, message: "Please select verification status" }]}
                             >
                                 <Select>
-                                    <Option value="true">True</Option>
-                                    <Option value="false">False</Option>
+                                    <Option value={true}>True</Option>
+                                    <Option value={false}>False</Option>
                                 </Select>
                             </Form.Item>
 

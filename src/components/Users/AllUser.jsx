@@ -119,6 +119,11 @@ const AllUser = () => {
             sorter: (a, b) => a.email.localeCompare(b.email),
         },
         {
+            title: "Verified",
+            dataIndex: "isVerified",
+            key: "isVerified",
+        },
+        {
             title: "Actions",
             key: "actions",
             render: (_, record) => (
@@ -145,7 +150,7 @@ const AllUser = () => {
 
     return (
         <div style={{ paddingTop: 20, marginLeft: marginLeft , marginTop : 24 }}>
-            <Space
+            {/* <Space
                 style={{
                     marginBottom: 16,
                     display: "flex",
@@ -162,7 +167,7 @@ const AllUser = () => {
                     onChange={(e) => setSearchText(e.target.value)}
                     style={{ width: 200 }}
                 />
-            </Space>
+            </Space> */}
 
             <Table
                 columns={columns}
