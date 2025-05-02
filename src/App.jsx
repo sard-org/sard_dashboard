@@ -14,7 +14,6 @@ function App() {
     "/orders",
   ];
 
-  // Custom logic to match dynamic paths like /users/123/update
   const matchRoute = (pathPattern) => {
     const regex = new RegExp(
       "^" + pathPattern.replace(/:[^/]+/g, "[^/]+") + "$"
@@ -24,10 +23,12 @@ function App() {
 
   const showSidebar = sidebarRoutes.some((path) => matchRoute(path));
 
+  const isAuthPage = location.pathname === "/auth";
+
   return (
     <div className="app-container">
       {showSidebar && <Sidebar />}
-      <div className="main-content">
+      <div className={`main-content ${isAuthPage ? "no-padding" : ""}`}>
         <AppRouter />
       </div>
     </div>

@@ -134,6 +134,10 @@
     padding: 20px;
 }
 
+.main-content.no-padding {
+    padding: 0;
+}
+
 .menu-item a {
     text-decoration: none;
     /* Remove underline */
