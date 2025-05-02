@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Space, Modal, message, Spin } from "antd";
+import { Table, Button, Space, Modal, message } from "antd";
 import { useNavigate } from "react-router-dom";
-import { EditOutlined, DeleteOutlined, InfoCircleOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import {
+    EditOutlined,
+    DeleteOutlined,
+    InfoCircleOutlined,
+    ExclamationCircleOutlined,
+} from "@ant-design/icons";
 import axios from "axios";
 import { api_url } from "../../utils/api";
 
@@ -10,9 +15,22 @@ const { confirm } = Modal;
 const AllBook = () => {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [marginLeft, setMarginLeft] = useState(190);
     const navigate = useNavigate();
 
-    // Fetch books
+    useEffect(() => {
+        fetchBooks();
+
+        const handleResize = () => {
+            setMarginLeft(window.innerWidth < 768 ? 0 : 190);
+        };
+
+        window.addEventListener("resize", handleResize);
+        handleResize(); // Set initially
+
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     const fetchBooks = async () => {
         try {
             setLoading(true);
@@ -28,11 +46,6 @@ const AllBook = () => {
         }
     };
 
-    useEffect(() => {
-        fetchBooks();
-    }, []);
-
-    // Confirm delete modal
     const confirmDelete = (id) => {
         confirm({
             title: "هل أنت متأكد أنك تريد حذف هذا الكتاب؟",
@@ -47,7 +60,6 @@ const AllBook = () => {
         });
     };
 
-    // Handle delete book
     const handleDelete = async (id) => {
         try {
             const token = localStorage.getItem("token");
@@ -55,7 +67,7 @@ const AllBook = () => {
                 headers: { Authorization: `Bearer ${token}` },
             });
             message.success("تم حذف الكتاب بنجاح!");
-            fetchBooks(); // Refresh the list
+            fetchBooks();
         } catch (error) {
             message.error("فشل في حذف الكتاب!");
         }
@@ -76,7 +88,12 @@ const AllBook = () => {
                 <img
                     src={cover}
                     alt="Book Cover"
-                    style={{ width: 50, height: 50, objectFit: "cover", borderRadius: 5 }}
+                    style={{
+                        width: 50,
+                        height: 50,
+                        objectFit: "cover",
+                        borderRadius: 5,
+                    }}
                 />
             ),
         },
@@ -97,27 +114,41 @@ const AllBook = () => {
             key: "actions",
             render: (_, record) => (
                 <Space>
-                    <Button icon={<InfoCircleOutlined />} onClick={() => navigate(`/books/${record.id}`)} />
-                    <Button type="primary" icon={<EditOutlined />} onClick={() => navigate(`/books/update/${record.id}`)} />
-                    <Button type="danger" icon={<DeleteOutlined />} onClick={() => confirmDelete(record.id)} />
+                    <Button
+                        icon={<InfoCircleOutlined />}
+                        onClick={() => navigate(`/books/${record.id}`)}
+                    />
+                    <Button
+                        type="primary"
+                        icon={<EditOutlined />}
+                        onClick={() => navigate(`/books/update/${record.id}`)}
+                    />
+                    <Button
+                        type="danger"
+                        icon={<DeleteOutlined />}
+                        onClick={() => confirmDelete(record.id)}
+                    />
                 </Space>
             ),
         },
     ];
-    
+
     return (
-        <Table
-            columns={columns}
-            dataSource={books.map((book, index) => ({
-                ...book,
-                key: book.id,
-                index,
-                author: book.Author ? book.Author.name : "غير معروف", // Extract author name
-            }))}
-            pagination={{ pageSize: 6 }}
-            bordered
-        />
+        <div style={{ padding: 20, marginLeft }}>
+            <Table
+                columns={columns}
+                dataSource={books.map((book, index) => ({
+                    ...book,
+                    key: book.id,
+                    index,
+                    author: book.Author ? book.Author.name : "غير معروف",
+                }))}
+                pagination={{ pageSize: 6 }}
+                loading={loading}
+                bordered
+            />
+        </div>
     );
-}    
+};
 
 export default AllBook;

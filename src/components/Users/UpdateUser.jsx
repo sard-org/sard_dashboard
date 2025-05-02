@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Form, Input, Button, Select, message, Card } from "antd";
+import { Form, Input, Button, Select, message, Card, Spin } from "antd";
 import axios from "axios";
 import { api_url } from "../../utils/api";
 
@@ -34,7 +34,7 @@ const UpdateUser = () => {
                 setUser(response.data);
                 form.setFieldsValue({
                     ...response.data,
-                    isVerified: response.data.isVerified ? "true" : "false", // تحويل البوليان لنص للقائمة المنسدلة
+                    isVerified: response.data.isVerified ? "true" : "false", // Convert boolean to string for Select dropdown
                 });
             } catch (error) {
                 message.error("Error fetching user data");
@@ -57,10 +57,10 @@ const UpdateUser = () => {
                 return;
             }
 
-            // تحويل قيمة isVerified إلى Boolean قبل الإرسال
+            // Convert isVerified value back to Boolean before sending to API
             const updatedValues = {
                 ...values,
-                isVerified: values.isVerified === "true",
+                isVerified: values.isVerified === "true", // Convert back to Boolean
             };
 
             await axios.patch(`${api_url}/api/users/${userId}`, updatedValues, {
@@ -79,54 +79,68 @@ const UpdateUser = () => {
     };
 
     return (
-        <Card title="Update User" style={{ maxWidth: 500, margin: "auto", marginTop: 20 }}>
-            {user ? (
-                <Form form={form} layout="vertical" onFinish={onFinish}>
-                    <Form.Item
-                        label="Name"
-                        name="name"
-                        rules={[{ required: true, message: "Please enter name" }]}
-                    >
-                        <Input />
-                    </Form.Item>
+        <div style={{ width: "100%", padding: "20px" }}>
+            {/* Back Button */}
+            <Button
+                type="default"
+                onClick={() => navigate("/users")}
+                style={{ marginBottom: 16 }}
+            >
+                Back to Users
+            </Button>
 
-                    <Form.Item
-                        label="Phone No."
-                        name="phone"
-                        rules={[{ required: true, message: "Please enter phone number" }]}
-                    >
-                        <Input />
-                    </Form.Item>
+            {/* Update User Form */}
+            <Card title="Update User" style={{ width: "100%", margin: "auto", marginTop: 20 }}>
+                {loading ? (
+                    <Spin size="large" style={{ display: "block", margin: "20px auto" }} />
+                ) : (
+                    user && (
+                        <Form form={form} layout="vertical" onFinish={onFinish}>
+                            <Form.Item
+                                label="Name"
+                                name="name"
+                                rules={[{ required: true, message: "Please enter name" }]}
+                            >
+                                <Input />
+                            </Form.Item>
 
-                    <Form.Item
-                        label="E-Mail"
-                        name="email"
-                        rules={[{ required: true, type: "email", message: "Please enter a valid email" }]}
-                    >
-                        <Input />
-                    </Form.Item>
+                            <Form.Item
+                                label="Phone No."
+                                name="phone"
+                                rules={[{ required: true, message: "Please enter phone number" }]}
+                            >
+                                <Input />
+                            </Form.Item>
 
-                    <Form.Item
-                        label="Verified Status"
-                        name="isVerified"
-                        rules={[{ required: true, message: "Please select verification status" }]}
-                    >
-                        <Select>
-                            <Option value="true">True</Option>
-                            <Option value="false">False</Option>
-                        </Select>
-                    </Form.Item>
+                            <Form.Item
+                                label="E-Mail"
+                                name="email"
+                                rules={[{ required: true, type: "email", message: "Please enter a valid email" }]}
+                            >
+                                <Input />
+                            </Form.Item>
 
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit" loading={loading}>
-                            Update
-                        </Button>
-                    </Form.Item>
-                </Form>
-            ) : (
-                <p>Loading user details...</p>
-            )}
-        </Card>
+                            <Form.Item
+                                label="Verified Status"
+                                name="isVerified"
+                                rules={[{ required: true, message: "Please select verification status" }]}
+                            >
+                                <Select>
+                                    <Option value="true">True</Option>
+                                    <Option value="false">False</Option>
+                                </Select>
+                            </Form.Item>
+
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit" loading={loading}>
+                                    Update
+                                </Button>
+                            </Form.Item>
+                        </Form>
+                    )
+                )}
+            </Card>
+        </div>
     );
 };
 

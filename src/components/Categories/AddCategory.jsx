@@ -54,23 +54,41 @@ const AddCategory = () => {
     };
 
     return (
-        <Form layout="vertical" form={form} onFinish={handleSubmit}>
-            <Form.Item name="name" label="اسم الفئة" rules={[{ required: true, message: "يرجى إدخال اسم الفئة" }]}>
-                <Input placeholder="أدخل اسم الفئة" />
-            </Form.Item>
+        <div style={{ padding: 20 }}>
+            <Button 
+                onClick={() => navigate("/categories")} 
+                style={{
+                    marginBottom: 20,
+                    padding: "8px 16px",
+                    fontSize: "16px",
+                    cursor: "pointer",
+                    border: "none",
+                    backgroundColor: "#1890ff",
+                    color: "#fff",
+                    borderRadius: "4px"
+                }}
+            >
+                Back to Categories
+            </Button>
 
-            <Form.Item label="رفع الصورة">
-                <Upload beforeUpload={() => false} onChange={handleUpload} showUploadList={true}>
-                    <Button icon={<UploadOutlined />}>اختر صورة</Button>
-                </Upload>
-            </Form.Item>
+            <Form layout="vertical" form={form} onFinish={handleSubmit}>
+                <Form.Item name="name" label="اسم الفئة" rules={[{ required: true, message: "يرجى إدخال اسم الفئة" }]}>
+                    <Input placeholder="أدخل اسم الفئة" />
+                </Form.Item>
 
-            <Form.Item>
-                <Button type="primary" htmlType="submit" loading={loading}>
-                    إضافة الفئة
-                </Button>
-            </Form.Item>
-        </Form>
+                <Form.Item label="رفع الصورة">
+                    <Upload beforeUpload={() => false} onChange={handleUpload} showUploadList={true}>
+                        <Button icon={<UploadOutlined />}>اختر صورة</Button>
+                    </Upload>
+                </Form.Item>
+
+                <Form.Item>
+                    <Button type="primary" htmlType="submit" loading={loading} style={{ width: "100%" }}>
+                        إضافة الفئة
+                    </Button>
+                </Form.Item>
+            </Form>
+        </div>
     );
 };
 

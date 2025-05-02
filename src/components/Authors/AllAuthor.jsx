@@ -12,10 +12,26 @@ const AllAuthor = () => {
     const [loading, setLoading] = useState(true);
     const [previewVisible, setPreviewVisible] = useState(false);
     const [previewImage, setPreviewImage] = useState("");
+    const [marginLeft, setMarginLeft] = useState(190); // Default margin-left
     const navigate = useNavigate();
 
     useEffect(() => {
         fetchAuthors();
+
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setMarginLeft(0); // Set margin-left to 0 when screen width is less than 768px
+            } else {
+                setMarginLeft(190); // Set margin-left to 190 for larger screens
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+        handleResize(); // Initial check on mount
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
 
     const fetchAuthors = async () => {
@@ -63,16 +79,16 @@ const AllAuthor = () => {
                 return;
             }
 
-            console.log(`Deleting author with ID: ${id}`);
-
             const response = await axios.delete(`${api_url}/api/authors/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
-            console.log("Delete response:", response);
-
-            message.success("Author deleted successfully!");
-            fetchAuthors();
+            if (response.status === 200) {
+                message.success("Author deleted successfully!");
+                fetchAuthors(); // Fetch updated list of authors
+            } else {
+                message.error("Failed to delete author!");
+            }
         } catch (error) {
             console.error("Error deleting author:", error);
             message.error("Failed to delete author!");
@@ -130,7 +146,7 @@ const AllAuthor = () => {
     ];
 
     return (
-        <div style={{ padding: 20 }}>
+        <div style={{ padding: 20, marginLeft: marginLeft }}>
             <Table
                 columns={columns}
                 dataSource={authors.map((author, index) => ({ ...author, key: author.id }))}

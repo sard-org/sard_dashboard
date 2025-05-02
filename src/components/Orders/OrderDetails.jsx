@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Descriptions, Card, Spin, Typography } from "antd";
-import { useParams } from "react-router-dom";
+import { Descriptions, Card, Spin, Typography, Button, message } from "antd";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { api_url } from "../../utils/api";
 
@@ -8,6 +8,7 @@ const { Title } = Typography;
 
 const OrderDetails = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [order, setOrder] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -26,6 +27,7 @@ const OrderDetails = () => {
             });
             setOrder(response.data);
         } catch (error) {
+            message.error("Error fetching order details");
             console.error("Error fetching order details:", error);
             setOrder(null);
         } finally {
@@ -34,17 +36,19 @@ const OrderDetails = () => {
     };
 
     if (loading) {
-        return <Spin size="large" />;
+        return <Spin size="large" style={{ display: "block", margin: "50px auto" }} />;
     }
 
     if (!order) {
-        return <p>Order not found</p>;
+        return <p style={{ textAlign: "center" }}>Order not found</p>;
     }
 
     return (
         <div style={{ padding: 20 }}>
-            <Title level={2}>Order Details</Title>
-            <Card>
+            <Button onClick={() => navigate("/orders")} type="primary" style={{ marginBottom: 20 }}>
+                Back to Orders
+            </Button>
+            <Card title={`Order Details`} style={{ width: "100%" }}>
                 <Descriptions bordered column={1}>
                     <Descriptions.Item label="Book Title">{order.book?.title}</Descriptions.Item>
                     <Descriptions.Item label="Description">{order.book?.description}</Descriptions.Item>

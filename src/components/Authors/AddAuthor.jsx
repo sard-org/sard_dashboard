@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Upload, message } from "antd";
+import { Form, Input, Button, Upload, message, Card, Space, Spin } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { api_url } from "../../utils/api";
@@ -9,7 +9,7 @@ const AddAuthor = () => {
     const [loading, setLoading] = useState(false);
     const [file, setFile] = useState(null);
     const [form] = Form.useForm();
-    const navigate = useNavigate(); // استخدم useNavigate للتوجيه
+    const navigate = useNavigate();
 
     const handleUpload = ({ file }) => {
         setFile(file);
@@ -45,7 +45,7 @@ const AddAuthor = () => {
             message.success("تمت إضافة المؤلف بنجاح!");
             form.resetFields();
             setFile(null);
-            navigate("/authors"); // التوجيه إلى صفحة المؤلفين بعد الإضافة
+            navigate("/authors");
         } catch (error) {
             message.error("فشل في إضافة المؤلف!");
         } finally {
@@ -54,23 +54,37 @@ const AddAuthor = () => {
     };
 
     return (
-        <Form layout="vertical" form={form} onFinish={handleSubmit}>
-            <Form.Item name="name" label="اسم المؤلف" rules={[{ required: true, message: "يرجى إدخال اسم المؤلف" }]}>
-                <Input placeholder="أدخل اسم المؤلف" />
-            </Form.Item>
-
-            <Form.Item label="رفع الصورة">
-                <Upload beforeUpload={() => false} onChange={handleUpload} showUploadList={true}>
-                    <Button icon={<UploadOutlined />}>اختر صورة</Button>
-                </Upload>
-            </Form.Item>
-
-            <Form.Item>
-                <Button type="primary" htmlType="submit" loading={loading}>
-                    إضافة المؤلف
+        <div style={{ width: "100%", padding: 20 }}>
+            <Space style={{ marginBottom: 16 }}>
+                <Button type="default" onClick={() => navigate("/authors")}>
+                    العودة إلى المؤلفين
                 </Button>
-            </Form.Item>
-        </Form>
+            </Space>
+
+            <Card title="إضافة مؤلف" style={{ width: "100%", margin: "auto", marginTop: 20 }}>
+                <Form layout="vertical" form={form} onFinish={handleSubmit}>
+                    <Form.Item
+                        name="name"
+                        label="اسم المؤلف"
+                        rules={[{ required: true, message: "يرجى إدخال اسم المؤلف" }]}
+                    >
+                        <Input placeholder="أدخل اسم المؤلف" />
+                    </Form.Item>
+
+                    <Form.Item label="رفع الصورة">
+                        <Upload beforeUpload={() => false} onChange={handleUpload} showUploadList={true}>
+                            <Button icon={<UploadOutlined />}>اختر صورة</Button>
+                        </Upload>
+                    </Form.Item>
+
+                    <Form.Item>
+                        <Button type="primary" htmlType="submit" loading={loading}>
+                            إضافة المؤلف
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </Card>
+        </div>
     );
 };
 

@@ -62,30 +62,35 @@ const UpdateAuthor = () => {
     };
 
     return (
-        <Form layout="vertical" form={form} onFinish={handleSubmit}>
-            <Form.Item
-                name="name"
-                label="Author Name"
-                rules={[{ required: true, message: "Please enter author name" }]}
-            >
-                <Input placeholder="Enter author name" />
-            </Form.Item>
+        <div style={{ padding: 20 }}>
+            <Button onClick={() => navigate("/authors")} type="primary" style={{ marginBottom: "20px" }}>
+                Back to Authors
+            </Button>
+            <Form layout="vertical" form={form} onFinish={handleSubmit} style={{ width: "100%" }}>
+                <Form.Item
+                    name="name"
+                    label="Author Name"
+                    rules={[{ required: true, message: "Please enter author name" }]}
+                >
+                    <Input placeholder="Enter author name" />
+                </Form.Item>
 
-            <Form.Item label="Upload Photo">
-                <Upload beforeUpload={() => false} onChange={handleFileChange} showUploadList={true}>
-                    <Button icon={<UploadOutlined />}>Select File</Button>
-                </Upload>
-            </Form.Item>
+                <Form.Item label="Upload Photo">
+                    <Upload beforeUpload={() => false} onChange={handleFileChange} showUploadList={true}>
+                        <Button icon={<UploadOutlined />}>Select File</Button>
+                    </Upload>
+                </Form.Item>
 
-            <Form.Item>
-                <Button type="primary" htmlType="submit" loading={loading}>
-                    Update Author
-                </Button>
-                <Button onClick={() => navigate("/authors")} style={{ marginLeft: "10px" }}>
-                    Cancel
-                </Button>
-            </Form.Item>
-        </Form>
+                <Form.Item>
+                    <Button type="primary" htmlType="submit" loading={loading}>
+                        Update Author
+                    </Button>
+                    <Button onClick={() => navigate("/authors")} style={{ marginLeft: "10px" }}>
+                        Cancel
+                    </Button>
+                </Form.Item>
+            </Form>
+        </div>
     );
 };
 

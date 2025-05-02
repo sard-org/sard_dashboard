@@ -33,17 +33,19 @@ const AuthorDetails = () => {
     if (!author) return <p style={{ textAlign: "center" }}>No author found</p>;
 
     return (
-        <Card title={`Author: ${author.name}`} style={{ maxWidth: 500, margin: "auto" }}>
-            {author.photo && <Image src={author.photo} width={100} />}
-            <p><strong>Name:</strong> {author.name}</p>
-            <p><strong>Created At:</strong> {new Date(author.createdAt).toLocaleString()}</p>
-            <Button onClick={() => navigate("/authors")} type="primary">
+        <div style={{ padding: 20 }}>
+            <Button onClick={() => navigate("/authors")} type="primary" style={{ marginBottom: "20px" }}>
                 Back to Authors
             </Button>
-            <Button onClick={() => navigate(`/authors/update/${id}`)} style={{ marginLeft: "10px" }}>
-                Edit Author
-            </Button>
-        </Card>
+            <Card title={`Author: ${author.name}`} style={{ width: "100%" }}>
+                {author.photo && <Image src={author.photo} width={100} />}
+                <p><strong>Name:</strong> {author.name}</p>
+                <p><strong>Created At:</strong> {new Date(author.createdAt).toLocaleString()}</p>
+                <Button onClick={() => navigate(`/authors/update/${id}`)} style={{ marginTop: "10px" }}>
+                    Edit Author
+                </Button>
+            </Card>
+        </div>
     );
 };
 

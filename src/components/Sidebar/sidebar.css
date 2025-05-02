@@ -40,16 +40,19 @@
     font-weight: 500;
 }
 
-.menu-item:hover, .menu-item.active {
+.menu-item:hover,
+.menu-item.active {
     background: #70A972;
     color: #ffffff;
 }
 
 .sub-menu {
     list-style: none;
-    padding-left: 30px;
-    background: #f8f8f8;
+    padding-left: 0;
+    margin: 0;
     display: none;
+    text-align: center;
+    background: #f8f8f8;
 }
 
 .sub-menu.open {
@@ -57,12 +60,15 @@
 }
 
 .sub-menu li {
-    padding: 10px;
+    padding: 8px 0;
 }
 
 .sub-menu li a {
-    color: #70A972;
+    display: inline-block;
+    width: 100%;
     text-decoration: none;
+    color: #333;
+    transition: background 0.3s ease;
 }
 
 .logout {
@@ -112,7 +118,7 @@
         z-index: 998;
     }
 
-    .sidebar.open + .menu-button {
+    .sidebar.open+.menu-button {
         left: -60px;
     }
 }
@@ -124,28 +130,29 @@
 /* Sidebar defaults to 220px width */
 .main-content {
     flex: 1;
-    margin-left: 190px; /* Push content next to sidebar */
     transition: margin-left 0.3s ease-in-out;
     padding: 20px;
 }
 
 .menu-item a {
-    text-decoration: none; /* Remove underline */
-    color: inherit; /* Inherit text color */
+    text-decoration: none;
+    /* Remove underline */
+    color: inherit;
+    /* Inherit text color */
     display: flex;
     align-items: center;
     gap: 10px;
     width: 100%;
 }
 
-.menu-item > div {
+.menu-item>div {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
 }
 
-.menu-item > div span {
+.menu-item>div span {
     flex: 1;
     text-align: center;
 }
@@ -161,7 +168,8 @@
 
 /* Fix Submenu Links */
 .sub-menu li a {
-    text-decoration: none; /* Remove underline */
+    text-decoration: none;
+    /* Remove underline */
     color: #70A972;
 }
 
@@ -180,6 +188,7 @@
     }
 
     .main-content {
-        margin-left: 0; /* Content takes full width when sidebar is hidden */
+        margin-left: 0;
+        /* Content takes full width when sidebar is hidden */
     }
 }

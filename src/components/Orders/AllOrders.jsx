@@ -10,10 +10,26 @@ const { Title } = Typography;
 const AllOrders = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [marginLeft, setMarginLeft] = useState(190); // Default marginLeft
     const navigate = useNavigate();
 
     useEffect(() => {
         fetchOrders();
+
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setMarginLeft(0);
+            } else {
+                setMarginLeft(190);
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+        handleResize(); // Initial check
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
 
     const fetchOrders = async () => {
@@ -79,14 +95,14 @@ const AllOrders = () => {
     ];
 
     return (
-        <div style={{ padding: 20 }}>
+        <div style={{ padding: 20, marginLeft: marginLeft }}>
             <Title level={2}>All Orders</Title>
             {loading ? (
                 <Spin size="large" />
             ) : (
                 <Table
                     columns={columns}
-                    dataSource={orders.map((order, index) => ({ ...order, key: order.id }))}
+                    dataSource={orders.map((order) => ({ ...order, key: order.id }))}
                     pagination={{ pageSize: 5 }}
                 />
             )}

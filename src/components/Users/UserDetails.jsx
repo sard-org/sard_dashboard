@@ -43,17 +43,20 @@ const UserDetails = () => {
     }
 
     return (
-        <Card title="User Details" style={{ maxWidth: 600, margin: "auto", marginTop: 20 }}>
-            <Descriptions bordered column={1}>
-                <Descriptions.Item label="Name">{user.name}</Descriptions.Item>
-                <Descriptions.Item label="Phone No.">{user.phone}</Descriptions.Item>
-                <Descriptions.Item label="E-Mail">{user.email}</Descriptions.Item>
-                <Descriptions.Item label="Verified">{user.isVerified ? "Yes" : "No"}</Descriptions.Item>
-            </Descriptions>
-            <Button type="primary" onClick={() => navigate("/users")} style={{ marginTop: 16 }}>
+        <div style={{ width: "100%", padding: "20px" }}>
+            <Button type="primary" onClick={() => navigate("/users")} style={{ marginBottom: 16 }}>
                 Back to Users
             </Button>
-        </Card>
+
+            <Card title="User Details" style={{ width: "100%" }}>
+                <Descriptions bordered column={1}>
+                    <Descriptions.Item label="Name">{user.name}</Descriptions.Item>
+                    <Descriptions.Item label="Phone No.">{user.phone}</Descriptions.Item>
+                    <Descriptions.Item label="E-Mail">{user.email}</Descriptions.Item>
+                    <Descriptions.Item label="Verified">{user.isVerified ? "Yes" : "No"}</Descriptions.Item>
+                </Descriptions>
+            </Card>
+        </div>
     );
 };
 

@@ -33,7 +33,6 @@ const Sidebar = () => {
                     </li>
                     <ul className={`sub-menu ${openMenu === "users" ? "open" : ""}`}>
                         <li><NavLink to="/">All Users</NavLink></li>
-                        <li><NavLink to="/users/add">Add User</NavLink></li>
                     </ul>
 
                     {/* Authors Menu */}
@@ -85,7 +84,6 @@ const Sidebar = () => {
                     </li>
                     <ul className={`sub-menu ${openMenu === "orders" ? "open" : ""}`}>
                         <li><NavLink to="/orders">All Orders</NavLink></li>
-                        <li><NavLink to="/orders/add">Add Order</NavLink></li>
                     </ul>
                 </ul>
             </div>

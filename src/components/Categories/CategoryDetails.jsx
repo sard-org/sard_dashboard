@@ -37,7 +37,24 @@ const CategoryDetails = () => {
     }
 
     return (
-        <div style={{ padding: 20 }}>
+        <div style={{ padding: 20, width: "100%" }}>
+            {/* Back Button placed before the category details */}
+            <button 
+                onClick={() => navigate("/categories")} 
+                style={{
+                    marginBottom: 20,
+                    padding: "8px 16px",
+                    fontSize: "16px",
+                    cursor: "pointer",
+                    border: "none",
+                    backgroundColor: "#1890ff",
+                    color: "#fff",
+                    borderRadius: "4px"
+                }}
+            >
+                Back to Categories
+            </button>
+
             {category ? (
                 <Card title={`Category: ${category.name}`} bordered={false}>
                     <p><strong>Category Name:</strong> {category.name}</p>
@@ -47,11 +64,9 @@ const CategoryDetails = () => {
                         <img 
                             src={category.photo} 
                             alt={category.name} 
-                            style={{ width: 200, height: 200, objectFit: "cover" }} 
+                            style={{ height: 200, objectFit: "cover" }} 
                         />
                     )}
-                    <br />
-                    <button onClick={() => navigate("/categories")}>Back to Categories</button>
                 </Card>
             ) : (
                 <p>Category not found!</p>

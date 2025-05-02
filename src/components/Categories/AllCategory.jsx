@@ -10,10 +10,27 @@ const { confirm } = Modal;
 const AllCategory = () => {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [marginLeft, setMarginLeft] = useState(190); // Default margin-left
     const navigate = useNavigate();
 
     useEffect(() => {
         fetchCategories();
+
+        // Handle window resize for responsive margin-left
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setMarginLeft(0); // Set margin-left to 0 for smaller screens
+            } else {
+                setMarginLeft(190); // Set margin-left to 190 for larger screens
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+        handleResize(); // Initial check on mount
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
 
     const fetchCategories = async () => {
@@ -107,7 +124,7 @@ const AllCategory = () => {
     ];
 
     return (
-        <div style={{ padding: 20 }}>
+        <div style={{ padding: 20, marginLeft: marginLeft }}>
             <Table
                 columns={columns}
                 dataSource={categories.map((category, index) => ({ ...category, key: category.id }))}

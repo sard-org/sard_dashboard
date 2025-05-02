@@ -77,6 +77,22 @@ const UpdateCategory = () => {
 
     return (
         <div style={{ padding: 20 }}>
+            <Button 
+                onClick={() => navigate("/categories")} 
+                style={{
+                    marginBottom: 20,
+                    padding: "8px 16px",
+                    fontSize: "16px",
+                    cursor: "pointer",
+                    border: "none",
+                    backgroundColor: "#1890ff",
+                    color: "#fff",
+                    borderRadius: "4px"
+                }}
+            >
+                Back to Categories
+            </Button>
+
             {category ? (
                 <Form
                     initialValues={{
@@ -84,7 +100,6 @@ const UpdateCategory = () => {
                     }}
                     onFinish={handleUpdate}
                     layout="vertical"
-                    style={{ maxWidth: 600 }}
                 >
                     <Form.Item
                         label="Category Name"
@@ -108,6 +123,7 @@ const UpdateCategory = () => {
                         type="primary"
                         htmlType="submit"
                         loading={updating}
+                        style={{ width: "100%" }} // Full width button
                     >
                         Update Category
                     </Button>

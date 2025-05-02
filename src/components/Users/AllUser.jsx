@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Input, Space } from "antd";
-import { PlusOutlined, SearchOutlined, EditOutlined, DeleteOutlined, InfoOutlined, InfoCircleFilled } from "@ant-design/icons";
+import { Table, Button, Input, Space, Modal, message } from "antd";
+import {
+    PlusOutlined,
+    SearchOutlined,
+    EditOutlined,
+    DeleteOutlined,
+    InfoCircleFilled,
+} from "@ant-design/icons";
 import axios from "axios";
 import { api_url } from "../../utils/api";
 import { useNavigate } from "react-router";
@@ -9,6 +15,7 @@ const AllUser = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchText, setSearchText] = useState("");
+    const [marginLeft, setMarginLeft] = useState(190); // Default margin-left
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,10 +30,9 @@ const AllUser = () => {
             try {
                 const response = await axios.get(`${api_url}/api/users`, {
                     headers: {
-                        "Authorization": `Bearer ${token}`,
-                    }
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
-                console.log("API Response:", response.data);
                 setUsers(Array.isArray(response.data) ? response.data : []);
             } catch (error) {
                 console.error("Error fetching users:", error);
@@ -37,11 +43,37 @@ const AllUser = () => {
         };
 
         fetchUsers();
+
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setMarginLeft(0); // Set margin-left to 0 when screen width is less than 768px
+            } else {
+                setMarginLeft(190); // Set margin-left to 190 for larger screens
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+        handleResize(); // Initial check on mount
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
     }, []);
 
     const filteredUsers = users.filter((user) =>
         user.email.toLowerCase().includes(searchText.toLowerCase())
     );
+
+    const confirmDelete = (id) => {
+        Modal.confirm({
+            title: "Are you sure you want to delete this user?",
+            content: "This action cannot be undone.",
+            okText: "Yes, Delete",
+            okType: "danger",
+            cancelText: "Cancel",
+            onOk: () => handleDelete(id),
+        });
+    };
 
     const handleDelete = async (id) => {
         const token = localStorage.getItem("token");
@@ -54,11 +86,12 @@ const AllUser = () => {
                 },
             });
             setUsers(users.filter((user) => user.id !== id));
+            message.success("User deleted successfully");
         } catch (error) {
             console.error("Error deleting user:", error);
+            message.error("Failed to delete user");
         }
     };
-
 
     const columns = [
         {
@@ -103,16 +136,22 @@ const AllUser = () => {
                     <Button
                         danger
                         icon={<DeleteOutlined />}
-                        onClick={() => handleDelete(record.id)}
+                        onClick={() => confirmDelete(record.id)}
                     />
                 </Space>
             ),
-        }
+        },
     ];
 
     return (
-        <div style={{ padding: 20 }}>
-            <Space style={{ marginBottom: 16, display: "flex", justifyContent: "space-between" }}>
+        <div style={{ padding: 20, marginLeft: marginLeft }}>
+            <Space
+                style={{
+                    marginBottom: 16,
+                    display: "flex",
+                    justifyContent: "space-between",
+                }}
+            >
                 <Button type="primary" icon={<PlusOutlined />}>
                     New Customer
                 </Button>
@@ -127,7 +166,7 @@ const AllUser = () => {
 
             <Table
                 columns={columns}
-                dataSource={filteredUsers.map((user, index) => ({ ...user, key: index }))}
+                dataSource={filteredUsers.map((user, index) => ({ ...user, key: index }))} // Add key for React list rendering
                 loading={loading}
                 pagination={{ pageSize: 7 }}
             />
