@@ -122,6 +122,23 @@ const AddBook = () => {
 
     return (
         <div style={{ padding: 20 }}>
+            <Button 
+                onClick={() => navigate("/books")} 
+                type="primary" 
+                style={{
+                    marginBottom: 20,
+                    padding: "8px 16px",
+                    fontSize: "16px",
+                    cursor: "pointer",
+                    border: "none",
+                    backgroundColor: "#1890ff",
+                    color: "#fff",
+                    borderRadius: "4px"
+                }}
+            >
+                Back to Books
+            </Button>
+            
             <h2 style={{ textAlign: "center", marginBottom: 20 }}>إضافة كتاب جديد</h2>
             <Form form={form} onFinish={onFinish} layout="vertical">
                 <Form.Item label="عنوان الكتاب" name="title" rules={[{ required: true, message: "يرجى إدخال العنوان" }]}>

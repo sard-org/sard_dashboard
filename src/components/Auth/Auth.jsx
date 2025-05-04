@@ -45,6 +45,9 @@ const Auth = () => {
             style={{
                 padding: "20px",
                 background: 'linear-gradient(179.95deg, #FFFFFF -36.74%, rgba(112, 169, 114, 0.6) 99.96%)',
+                minHeight: '100vh',
+                width: '100%',
+                margin: 0
             }}
         >
             <Col xs={22} sm={18} md={14} lg={10} xl={8}>
