@@ -211,7 +211,7 @@ const UpdateBook = () => {
                     {initialData.audio && (
                         <div style={{ marginTop: 10 }}>
                             <a href={initialData.audio} target="_blank" rel="noopener noreferrer">
-                                الاستماع إلى الملف الحالي
+                                Listen to current audio file
                             </a>
                         </div>
                     )}
