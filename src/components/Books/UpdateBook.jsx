@@ -107,14 +107,14 @@ const UpdateBook = () => {
         if (!isFree) {
             if (pricingOption === "price") {
                 formData.append("price", values.price);
-                formData.append("price_points", 0);
+                formData.append("price_points", null);
             } else if (pricingOption === "price_points") {
                 formData.append("price_points", values.price_points);
-                formData.append("price", 0);
+                formData.append("price", null);
             }
         } else {
-            formData.append("price", 0);
-            formData.append("price_points", 0);
+            formData.append("price", null);
+            formData.append("price_points", null);
         }
 
         categoryInputs.forEach((index, i) => {
