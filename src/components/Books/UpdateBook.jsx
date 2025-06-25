@@ -157,6 +157,22 @@ const UpdateBook = () => {
 
     return (
         <div style={{ padding: 20 }}>
+            <Button
+                onClick={() => navigate("/books")}
+                type="primary"
+                style={{
+                    marginBottom: 20,
+                    padding: "8px 16px",
+                    fontSize: "16px",
+                    cursor: "pointer",
+                    border: "none",
+                    backgroundColor: "#1890ff",
+                    color: "#fff",
+                    borderRadius: "4px"
+                }}
+            >
+                Back to Books
+            </Button>
             <h2 style={{ textAlign: "center", marginBottom: 20 }}>Update Book</h2>
             <Form
                 layout="vertical"
