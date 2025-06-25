@@ -1,64 +1,93 @@
-# 📘 SARD Admin Dashboard
+# Sard Dashboard - Admin Panel
 
-Frontend admin dashboard for the **SARD Application**, built using **React**, **Vite**, and **Ant Design**. This interface empowers administrators to efficiently manage users, books, authors, categories, and orders. 
+![Sard Dashboard Preview](screenshot.png)
 
-✨ Features
-🔐 Authentication with protected routes
+## Overview
 
-📚 CRUD operations for books, authors, categories, and users
+The Sard Dashboard is a comprehensive admin panel built with React that allows administrators to manage users, authors, books, categories, and orders. It features a clean, responsive interface with robust functionality for content management.
 
-📦 Order management interface
+## Features
 
-🎨 Integrated with Ant Design for consistent UI/UX
+- **Authentication System**: Secure login with token-based authentication
+- **User Management**: View, update, and manage users
+- **Author Management**: CRUD operations for authors with image uploads
+- **Book Management**: Add, edit, and delete books with multiple categories
+- **Category Management**: Organize books into categories
+- **Order Tracking**: View and manage customer orders
+- **Responsive Design**: Works on desktop and mobile devices
+- **Modern UI**: Built with Ant Design components
 
-⚡ Built with Vite for fast performance
+## Technologies Used
 
-🌐 Axios for API integration
+- **Frontend**: React (v18)
+- **UI Framework**: Ant Design
+- **Routing**: React Router
+- **HTTP Client**: Axios
+- **Build Tool**: Vite
+- **Linting**: ESLint
+- **Deployment**: Vercel
 
-🧩 Modular and scalable code structure
+## Installation
 
-🧪 Tech Stack
-React 18
-
-Vite
-
-React Router v7
-
-Ant Design (antd)
-
-Axios
-
-React Icons
-
-ESLint
-
-
-# Clone the repository
+1. Clone the repository:
+```bash
 git clone https://github.com/your-username/sard-dashboard.git
+```
+
+2. Install dependencies:
+```bash
 cd sard-dashboard
-
-# Install dependencies
 npm install
+```
 
-# Start development server
+3. Start the development server:
+```bash
 npm run dev
+```
 
-🏗 Build
+## Project Structure
 
-npm run build
+```
+sard-dashboard/
+├── public/
+├── src/
+│   ├── assets/             # Static assets
+│   ├── components/         # Reusable components
+│   │   ├── Auth/           # Authentication components
+│   │   ├── Authors/        # Author management components
+│   │   ├── Books/          # Book management components
+│   │   ├── Categories/     # Category management components
+│   │   ├── Orders/         # Order management components
+│   │   ├── Sidebar/        # Navigation sidebar
+│   │   └── Users/          # User management components
+│   ├── pages/              # Page components
+│   ├── routes/             # Application routes
+│   ├── utils/              # Utility functions
+│   ├── App.css             # Global styles
+│   ├── App.jsx             # Main application component
+│   ├── index.css           # Base styles
+│   └── main.jsx            # Entry point
+├── .eslintrc.js            # ESLint configuration
+├── index.html              # Main HTML file
+├── package.json            # Project dependencies
+├── vercel.json             # Vercel deployment configuration
+└── vite.config.js          # Vite configuration
+```
 
-To preview the production build locally:
+## Configuration
 
-npm run preview
+The API endpoint is configured in `src/utils/api.js`:
+```javascript
+export const api_url = "https://api.mohamed-ramadan.me";
+```
 
-| Script            | Description                   |
-| ----------------- | ----------------------------- |
-| `npm run dev`     | Run the development server    |
-| `npm run build`   | Build for production          |
-| `npm run preview` | Preview production build      |
-| `npm run lint`    | Lint the project using ESLint |
+## Available Scripts
 
+- `npm run dev`: Start development server
+- `npm run build`: Build production bundle
+- `npm run lint`: Run ESLint
+- `npm run preview`: Preview production build
 
-🔗 **Live Dashboard:** [View Online](https://sard-dashboard.vercel.app/)
+## Deployment
 
-📁 **GitHub Repository:** [SARD Dashboard on GitHub](https://github.com/sard-org/sard_dashboard)
+The project is configured for deployment on Vercel. The `vercel.json` file contains the necessary configuration for clean URLs and routing.
