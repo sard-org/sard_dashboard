@@ -6,7 +6,6 @@ Frontend admin dashboard for the **SARD Application**, built using **React**, **
 
 ## 📁 Project Structure
 
-```bash
 src/
 ├── assets/                   # Static assets
 ├── components/
