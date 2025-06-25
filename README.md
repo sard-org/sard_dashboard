@@ -1,34 +1,6 @@
 # 📘 SARD Admin Dashboard
 
-Frontend admin dashboard for the **SARD Application**, built using **React**, **Vite**, and **Ant Design**. This interface empowers administrators to efficiently manage users, books, authors, categories, and orders.
-
----
-
-## 📁 Project Structure
-
-src/
-├── assets/                   # Static assets
-├── components/
-│   ├── Auth/                 # Authentication logic (login, protected routes)
-│   ├── Authors/              # Manage authors (Add, List, Update, Details)
-│   ├── Books/                # Manage books
-│   ├── Categories/           # Manage categories
-│   ├── Orders/               # Manage orders
-│   ├── Sidebar/              # Sidebar component
-│   └── Users/                # Manage users
-├── pages/                    # Main route pages
-│   ├── Authors.jsx
-│   ├── Book.jsx
-│   ├── Categories.jsx
-│   ├── Orders.jsx
-│   └── Users.jsx
-├── routes/
-│   └── AppRouter.jsx         # Main router configuration
-├── utils/
-│   └── api.js                # Axios instance for API calls
-├── App.jsx                   # Root component
-├── main.jsx                  # App entry point
- 
+Frontend admin dashboard for the **SARD Application**, built using **React**, **Vite**, and **Ant Design**. This interface empowers administrators to efficiently manage users, books, authors, categories, and orders. 
 
 ✨ Features
 🔐 Authentication with protected routes
