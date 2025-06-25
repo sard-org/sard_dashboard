@@ -1,6 +1,6 @@
 # Sard Dashboard - Admin Panel
 
-![Sard Dashboard Preview](screenshot.png)
+![Sard Dashboard Preview](preview.png)
 
 ## Overview
 
