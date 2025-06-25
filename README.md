@@ -91,3 +91,5 @@ export const api_url = "https://api.mohamed-ramadan.me";
 ## Deployment
 
 The project is configured for deployment on Vercel. The `vercel.json` file contains the necessary configuration for clean URLs and routing.
+
+Live-Server : https://sard-dashboard.vercel.app/
